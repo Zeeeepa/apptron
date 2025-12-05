@@ -1,0 +1,65 @@
+- prompt: Install Chrome for Testing and load Apptron extension
+  commands:
+    - command: exec
+      lang: pwsh
+      code: |
+        cd $env:TEMP
+        Write-Host "Setting up Chrome for Testing with Apptron extension..."
+
+        # Initialize npm project
+        Write-Host "Running 'npm init -y'..."
+        npm init -y
+
+        # Install Chrome browser tools
+        Write-Host "Installing @puppeteer/browsers..."
+        npm install @puppeteer/browsers
+
+        # Install Chrome
+        Write-Host "Installing Chrome via @puppeteer/browsers..."
+        npx @puppeteer/browsers install chrome
+
+        # Define paths
+        $extensionPath = Join-Path "${env:GITHUB_WORKSPACE}" "extension"
+        $profilePath = Join-Path $env:TEMP "chrome-profile-$(Get-Random)"
+
+        Write-Host "Extension path: $extensionPath"
+        Write-Host "Chrome user data dir: $profilePath"
+
+        # Validate extension path exists
+        if (-not (Test-Path $extensionPath)) {
+            Write-Host "ERROR: Extension not found at $extensionPath"
+            Write-Host "Looking for extension files..."
+            Get-ChildItem "${env:GITHUB_WORKSPACE}" -Recurse -Directory -Filter "extension" | Select-Object FullName
+            exit 1
+        }
+
+        # Validate manifest.json exists
+        $manifestPath = Join-Path $extensionPath "manifest.json"
+        if (-not (Test-Path $manifestPath)) {
+            Write-Host "ERROR: manifest.json not found at $manifestPath"
+            exit 1
+        }
+
+        Write-Host "✅ Extension validation passed"
+
+        # Build Chrome arguments with extension loaded
+        $chromeArgs = @(
+          "--start-maximized",
+          "--load-extension=$extensionPath",
+          "--user-data-dir=$profilePath",
+          "--no-first-run",
+          "--no-default-browser-check",
+          "--disable-infobars",
+          "--disable-dev-shm-usage",
+          "${TD_WEBSITE}"
+        ) -join ' '
+
+        Write-Host "Launching Chrome with Apptron extension..."
+        Start-Process "cmd.exe" -ArgumentList "/c", "npx @puppeteer/browsers launch chrome -- $chromeArgs"
+
+        # Wait for Chrome to start
+        Start-Sleep -Seconds 5
+
+        Write-Host "✅ Chrome launched successfully with Apptron extension loaded"
+        exit 0
+

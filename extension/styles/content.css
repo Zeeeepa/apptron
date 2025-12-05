@@ -1,0 +1,71 @@
+/* Styles for Deploy to Apptron button on GitHub */
+
+.apptron-deploy-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 16px;
+  margin-left: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  border: 1px solid;
+  border-radius: 6px;
+  transition: all 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+  
+  /* Apptron brand colors */
+  color: #fff;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-color: rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.apptron-deploy-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #5568d3 0%, #65408b 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.apptron-deploy-btn:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.apptron-deploy-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.apptron-deploy-btn svg {
+  fill: currentColor;
+}
+
+/* Loading spinner */
+.apptron-spinner {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: apptron-spin 0.6s linear infinite;
+  margin-right: 8px;
+}
+
+@keyframes apptron-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .apptron-deploy-btn {
+    margin-left: 0;
+    margin-top: 8px;
+  }
+}
+

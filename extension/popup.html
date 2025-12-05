@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deploy to Apptron</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 320px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      padding: 20px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+
+    .logo {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .logo h1 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .logo p {
+      font-size: 12px;
+      opacity: 0.9;
+    }
+
+    .info {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+
+    .info h3 {
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    .info p {
+      font-size: 12px;
+      line-height: 1.6;
+      opacity: 0.95;
+    }
+
+    .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .btn {
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+      text-decoration: none;
+      text-align: center;
+      display: block;
+    }
+
+    .btn-primary {
+      background: white;
+      color: #667eea;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .version {
+      text-align: center;
+      font-size: 11px;
+      margin-top: 16px;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+  <div class="logo">
+    <h1>🚀 Deploy to Apptron</h1>
+    <p>One-click deployments</p>
+  </div>
+
+  <div class="info">
+    <h3>How to use:</h3>
+    <p>1. Navigate to any GitHub repository<br>
+       2. Click "Deploy to Apptron" button<br>
+       3. Configure environment variables<br>
+       4. Deploy and start coding!</p>
+  </div>
+
+  <div class="actions">
+    <a href="https://apptron.dev" target="_blank" class="btn btn-primary">
+      Open Apptron
+    </a>
+    <a href="https://github.com/tractordev/apptron" target="_blank" class="btn btn-secondary">
+      View Documentation
+    </a>
+  </div>
+
+  <div class="version">v1.0.0</div>
+</body>
+</html>
+
