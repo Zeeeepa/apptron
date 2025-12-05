@@ -1,0 +1,55 @@
+name: "Test Apptron Chrome Extension on GitHub"
+url: "https://github.com/vercel/next.js"
+steps:
+  # Step 1: Wait for GitHub page to load
+  - prompt: "Wait for the GitHub repository page to fully load. Take a screenshot."
+  - action: "screenshot"
+    path: "01-github-loaded.png"
+
+  # Step 2: Look for the Deploy to Apptron button
+  - prompt: "Look for a purple gradient button that says 'Deploy to Apptron' next to the branch selector dropdown. The button should have a deploy icon. Take a screenshot highlighting this area."
+  - action: "screenshot"
+    path: "02-looking-for-button.png"
+
+  # Step 3: Verify button exists
+  - prompt: "Check if the 'Deploy to Apptron' button is visible on the page. Report whether you found it or not. If you don't see it, check the Chrome DevTools console for any JavaScript errors."
+  
+  # Step 4: If button exists, click it
+  - prompt: "If you found the 'Deploy to Apptron' button, click it. The button should change to show 'Analyzing project...' with a loading spinner. If you didn't find the button, report that the extension did not inject the button correctly."
+  - action: "wait"
+    timeout: 3000
+
+  # Step 5: Check for loading state
+  - action: "screenshot"
+    path: "03-after-button-click.png"
+
+  # Step 6: Wait for config page to open
+  - prompt: "Check if a new browser tab opened with the title 'Configure Environment - Deploy to Apptron'. This should be the configuration page for environment variables. If it opened, switch to that tab."
+  - action: "wait"
+    timeout: 5000
+
+  # Step 7: Screenshot config page
+  - action: "screenshot"
+    path: "04-config-page.png"
+
+  # Step 8: Verify config page content
+  - prompt: "On the configuration page, verify the following elements are present: 1) Repository name (vercel/next.js), 2) Branch name, 3) Project type badges, 4) Environment variables form, 5) 'Deploy Now' button. Report what you see."
+
+  # Step 9: Check environment variables
+  - prompt: "Look at the environment variables that were detected. Are there any variables shown? What are their names? Are any marked as 'REQUIRED'? Take a screenshot."
+  - action: "screenshot"
+    path: "05-environment-variables.png"
+
+  # Step 10: Try filling a variable (if any exist)
+  - prompt: "If there are any environment variables shown, try filling in a test value for the first one. If there are no variables, report that no variables were detected."
+
+  # Step 11: Check Deploy Now button
+  - prompt: "Verify the 'Deploy Now' button exists at the bottom of the form. Check if clicking it would work (but don't click it yet)."
+  - action: "screenshot"
+    path: "06-final-config-page.png"
+
+  # Step 12: Final report
+  - prompt: "Provide a final summary report: 1) Did the button appear on GitHub? 2) Did clicking it trigger the analysis? 3) Did the config page open? 4) Were environment variables detected? 5) Does the form look correct? 6) Any errors in the console?"
+  - action: "screenshot"
+    path: "07-final-summary.png"
+
