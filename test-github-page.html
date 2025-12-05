@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>facebook/react - GitHub</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #0d1117;
+      color: #c9d1d9;
+    }
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .repo-header {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .repo-name {
+      font-size: 20px;
+      font-weight: 600;
+    }
+    .action-bar {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .btn {
+      padding: 5px 16px;
+      border: 1px solid #30363d;
+      border-radius: 6px;
+      background: #21262d;
+      color: #c9d1d9;
+      cursor: pointer;
+    }
+    .file-list {
+      border: 1px solid #30363d;
+      border-radius: 6px;
+      background: #0d1117;
+    }
+    .file-item {
+      padding: 8px 16px;
+      border-bottom: 1px solid #21262d;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .file-item:last-child {
+      border-bottom: none;
+    }
+    [role="rowheader"] {
+      font-weight: 500;
+    }
+    .language-stats {
+      margin-top: 20px;
+      padding: 16px;
+      border: 1px solid #30363d;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="repo-header">
+      <h1 class="repo-name">
+        <a href="/facebook">facebook</a> / <a href="/facebook/react">react</a>
+      </h1>
+      <span itemprop="programmingLanguage">JavaScript</span>
+    </div>
+    
+    <div class="action-bar" data-testid="get-repo-select-menu">
+      <button class="btn" data-hotkey="w">
+        <span>main</span>
+      </button>
+      <button class="btn">
+        <span>Code</span>
+      </button>
+      <!-- Extension should inject button here -->
+    </div>
+    
+    <div class="file-list">
+      <div class="file-item">
+        <span role="rowheader"><a href="/facebook/react/blob/main/package.json">package.json</a></span>
+      </div>
+      <div class="file-item">
+        <span role="rowheader"><a href="/facebook/react/blob/main/README.md">README.md</a></span>
+      </div>
+      <div class="file-item">
+        <span role="rowheader"><a href="/facebook/react/blob/main/tsconfig.json">tsconfig.json</a></span>
+      </div>
+      <div class="file-item">
+        <span role="rowheader"><a href="/facebook/react/blob/main/yarn.lock">yarn.lock</a></span>
+      </div>
+      <div class="file-item">
+        <span role="rowheader"><a href="/facebook/react/tree/main/packages">packages</a></span>
+      </div>
+    </div>
+    
+    <div class="language-stats">
+      <h3>Languages</h3>
+      <div class="repository-lang-stats-graph">
+        <span aria-label="JavaScript 98.3%">JavaScript</span>
+        <span aria-label="TypeScript 1.5%">TypeScript</span>
+        <span aria-label="CSS 0.2%">CSS</span>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // Simulate the extension being loaded
+    console.log('Test page loaded. Path:', window.location.pathname);
+    console.log('Files found:', 
+      Array.from(document.querySelectorAll('[role="rowheader"]'))
+        .map(el => el.textContent.trim())
+    );
+  </script>
+</body>
+</html>
+

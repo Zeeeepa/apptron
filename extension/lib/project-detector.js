@@ -2,7 +2,7 @@
  * Project Type Detector - Detect project configuration and requirements
  */
 
-export class ProjectDetector {
+class ProjectDetector {
   /**
    * Detect project configuration from files
    */
@@ -209,5 +209,7 @@ export class ProjectDetector {
   }
 }
 
-export default ProjectDetector;
-
+// Make available globally for content script
+if (typeof window !== 'undefined') {
+  window.ProjectDetector = ProjectDetector;
+}

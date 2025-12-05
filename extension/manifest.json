@@ -18,7 +18,11 @@
   "content_scripts": [
     {
       "matches": ["https://github.com/*/*"],
-      "js": ["content-script.js"],
+      "js": [
+        "lib/github-parser.js",
+        "lib/project-detector.js",
+        "content-script.js"
+      ],
       "css": ["styles/content.css"],
       "run_at": "document_end"
     }
@@ -45,4 +49,3 @@
     }
   ]
 }
-

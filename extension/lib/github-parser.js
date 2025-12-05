@@ -2,7 +2,7 @@
  * GitHub Parser - Extract repository information from GitHub pages
  */
 
-export class GitHubParser {
+class GitHubParser {
   constructor() {
     this.cache = new Map();
   }
@@ -226,6 +226,7 @@ export class GitHubParser {
   }
 }
 
-// Export singleton instance
-export default new GitHubParser();
-
+// Make available globally for content script
+if (typeof window !== 'undefined') {
+  window.GitHubParser = GitHubParser;
+}
