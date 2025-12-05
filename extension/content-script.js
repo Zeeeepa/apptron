@@ -150,12 +150,13 @@
       return; // Button already exists
     }
     
-    // Find the action bar (where Code button is)
-    const actionBar = document.querySelector('[data-testid="get-repo-select-menu"]')?.parentElement;
+    // Find the ref selector button (branch dropdown) - this is where we inject
+    const refSelector = document.querySelector('[data-testid="ref-selector-hotkey-button"]');
     
-    if (actionBar) {
+    if (refSelector && refSelector.parentElement) {
       const button = createRunButton();
-      actionBar.insertBefore(button, actionBar.firstChild);
+      // Insert button right after the branch selector
+      refSelector.parentElement.insertBefore(button, refSelector.nextSibling);
     }
   }
   
@@ -188,4 +189,3 @@
   // Run initialization
   init();
 })();
-
