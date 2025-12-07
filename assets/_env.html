@@ -48,7 +48,9 @@
     // load the iframe after service worker is ready
     document.querySelector("#vscode-frame").src = "/_vscode";
 
-    import { setupWanix, getAuth, envUUID, getMeta, redirectTo, urlFor } from "/lib/apptron.js";
+    import { setupWanix, getAuth, envUUID, getMeta, redirectTo, urlFor, parseGitHubParams, hasGitHubParams } from "/lib/apptron.js";
+    import { initializeGitHubUI } from "/lib/github-ui.js";
+    import { githubStateMachine, GitHubState } from "/lib/github-state.js";
 
     const loader = document.getElementById("loader");
     loader.showModal();
@@ -59,6 +61,19 @@
         loader.remove();
       }, 200);
     };
+
+    // Check if GitHub parameters are present and parse them
+    if (hasGitHubParams()) {
+      console.log('GitHub parameters detected, initializing GitHub UI...');
+      initializeGitHubUI();
+      const githubParams = parseGitHubParams();
+      if (githubParams) {
+        githubStateMachine.setState(GitHubState.PARSING_URL, {
+          message: `Preparing to clone ${githubParams.owner}/${githubParams.repo}`,
+          metadata: githubParams
+        });
+      }
+    }
 
     const project = JSON.parse(getMeta("project"));
     const auth = await getAuth();
