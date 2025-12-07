@@ -320,3 +320,59 @@ export async function copyText(text) {
         }
     }
 }
+
+/**
+ * Parse GitHub repository parameters from URL
+ * Supports formats:
+ * - ?github=owner/repo
+ * - ?github=owner/repo&branch=main
+ * - ?github=owner/repo&ref=commit-sha
+ * - ?github=owner/repo&path=subfolder
+ * @returns {Object|null} Parsed GitHub parameters or null if not present
+ */
+export function parseGitHubParams() {
+    const params = new URLSearchParams(window.location.search);
+    const github = params.get('github');
+    
+    if (!github) {
+        return null;
+    }
+
+    // Validate GitHub repo format (owner/repo)
+    const githubPattern = /^[\w\-\.]+\/[\w\-\.]+$/;
+    if (!githubPattern.test(github)) {
+        console.error('Invalid GitHub repository format. Expected: owner/repo');
+        return null;
+    }
+
+    const [owner, repo] = github.split('/');
+    
+    const githubParams = {
+        owner,
+        repo,
+        branch: params.get('branch') || null,
+        ref: params.get('ref') || null,
+        path: params.get('path') || null,
+        shallow: params.get('shallow') === 'true' || params.get('shallow') === '1',
+        // Full GitHub URL for reference
+        githubUrl: `https://github.com/${owner}/${repo}`
+    };
+
+    // Store in window.apptron for global access
+    if (!window.apptron) {
+        window.apptron = {};
+    }
+    window.apptron.github = githubParams;
+
+    console.log('Parsed GitHub parameters:', githubParams);
+    return githubParams;
+}
+
+/**
+ * Check if current URL has GitHub parameters
+ * @returns {boolean}
+ */
+export function hasGitHubParams() {
+    const params = new URLSearchParams(window.location.search);
+    return params.has('github');
+}
